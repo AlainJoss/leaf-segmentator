@@ -10,6 +10,20 @@ st.title('Leaf Segmentator')
 
 st.write("""
 
+#### TODO: 
+- better name images or drop the last part of the name for report
+- change post processing to be more manipolable
+- clean and comment code base
+- extract names of session states to file
+- clean the repo-structure
+- create data folders for images
+- clean example notebook
+- improve explanations on UI
+- correct messages on UI
+- Make explanation on overview.py about whole process
+- Record screen cast with example
+- Make read me with instructions about UI
+
 Follow the steps:
 
 - Visit one page after the other.

@@ -12,9 +12,6 @@ st.write("## Segment Images")
 if 'start_segmenting' not in st.session_state:
     st.session_state['start_segmenting'] = False
 
-if 'clustering_mask' not in st.session_state:
-    st.session_state['clustering_mask'] = True
-
 if 'num_clusters' not in st.session_state:
     st.session_state['num_clusters'] = 0
 

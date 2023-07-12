@@ -41,9 +41,6 @@ if 'choose_image' in st.session_state:
 
         img_paths = []
 
-        # TODO: REMOVE
-        st.session_state['num_clusters'] = 4
-
         k = st.session_state['num_clusters'] - 1
 
         for i in range(0, len(img_paths_processed), k):

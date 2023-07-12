@@ -75,7 +75,10 @@ if 'cut_stems' in st.session_state:
                 img = Image.open(img_path)
 
                 display_img = img.copy()
-                display_img.thumbnail((600, 600)) 
+
+                SIZE = 1000
+
+                display_img.thumbnail((SIZE, SIZE)) 
 
                 rotation_value = st.slider("Slide to rotate the image", -180, 180, value=0, step=90)
                 rotated_image = rotate_image(img_path, rotation_value)
@@ -85,11 +88,9 @@ if 'cut_stems' in st.session_state:
                 processed_image = process_image(rotated_image, slider_value)
 
                 display_processed_image = processed_image.copy()
-                display_processed_image.thumbnail((600, 600))  
+                display_processed_image.thumbnail((SIZE, SIZE))  
 
-                st.image(display_processed_image, width=500)  # TODO: OR USE COLUMN WIDTH
-
-                col1, col2, col3 = st.columns([1,1,1.6]) 
+                col1, col2 = st.columns([1.5,10]) 
 
                 with col1:
                     if st.button("Previous Image"):
@@ -97,7 +98,7 @@ if 'cut_stems' in st.session_state:
 
                         st.experimental_rerun()
 
-                with col3:  
+                with col2:  
                     if st.button("Next Image"):
                         save_image(processed_image)
 
@@ -109,6 +110,8 @@ if 'cut_stems' in st.session_state:
                             st.session_state['idx'] = idx + 1  
 
                         st.experimental_rerun()
+
+                st.image(display_processed_image, use_column_width=True)  # TODO: OR USE COLUMN WIDTH
 
             
         else:
