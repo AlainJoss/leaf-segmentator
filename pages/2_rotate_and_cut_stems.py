@@ -3,26 +3,34 @@ import os
 from PIL import Image
 import numpy as np
 
+# TODO: implement index = 0 min!
+
 st.write("## Rotate and Cut Stems")
 
 if 'cut_stems' in st.session_state:
 
     if 'crop_images' not in st.session_state:
 
-        st.write("Rotate and cut the upper part of the leaf, moving the sliders as needed.")
+        st.write(""" 
+        Steps:
+        - Rotate the images such that the leafs are placed upside-down.
+        - Cut the stems away, but keep the leaf area intact!
+        - The images are to be processed one-by-one.
+        """)
+
 
         ##### FUNCTIONS #####
 
         def rotate_image(img_path, rotation_value):
             img = Image.open(img_path)
-            rotated_img = img.rotate(rotation_value, expand=True)  # Rotate the image
+            rotated_img = img.rotate(rotation_value, expand=True)
             return rotated_img
 
         def process_image(img, slider_value):
-            img_array = np.array(img)  # Convert image to NumPy array
-            img_array[:slider_value, :] = 255  # Set all pixel values above the slider_value to white (255)
+            img_array = np.array(img)  
+            img_array[:slider_value, :] = 255 
 
-            processed_img = Image.fromarray(img_array)  # Convert NumPy array back to PIL image
+            processed_img = Image.fromarray(img_array)  
             return processed_img
 
 
@@ -66,9 +74,8 @@ if 'cut_stems' in st.session_state:
                 img_path = 'images/' + img_path 
                 img = Image.open(img_path)
 
-                # Create a copy of the image for display purposes
                 display_img = img.copy()
-                display_img.thumbnail((600, 600))  # Resize the display image to fit within 600x600 box, maintaining aspect ratio
+                display_img.thumbnail((600, 600)) 
 
                 rotation_value = st.slider("Slide to rotate the image", -180, 180, value=0, step=90)
                 rotated_image = rotate_image(img_path, rotation_value)
@@ -77,21 +84,20 @@ if 'cut_stems' in st.session_state:
                             
                 processed_image = process_image(rotated_image, slider_value)
 
-                # Create a copy of the processed image for display purposes
                 display_processed_image = processed_image.copy()
-                display_processed_image.thumbnail((600, 600))  # Resize the processed image for display
+                display_processed_image.thumbnail((600, 600))  
 
                 st.image(display_processed_image, width=500)  # TODO: OR USE COLUMN WIDTH
 
-                col1, col2, col3 = st.columns([1.5,3.8,1])  # Adjust the second column weightage to suit your needs
+                col1, col2, col3 = st.columns([1,1,1.6]) 
 
                 with col1:
                     if st.button("Previous Image"):
-                        st.session_state['idx'] = idx - 1  # move to next image
+                        st.session_state['idx'] = idx - 1  
 
                         st.experimental_rerun()
 
-                with col3:  # changed from col2 to col3
+                with col3:  
                     if st.button("Next Image"):
                         save_image(processed_image)
 
@@ -99,7 +105,7 @@ if 'cut_stems' in st.session_state:
                             save_images()
                             st.session_state['finished_processing'] = True
                         else:
-                            st.session_state['idx'] = idx + 1  # move to next image
+                            st.session_state['idx'] = idx + 1  
 
                         st.experimental_rerun()
 
@@ -111,4 +117,4 @@ if 'cut_stems' in st.session_state:
         st.success("You can now segment the images!") 
 
 else: 
-    st.error("Go back to upload images to enable this step.")
+    st.error("Go back to 'upload' to enable this step.")

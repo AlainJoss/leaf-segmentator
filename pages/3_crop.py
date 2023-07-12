@@ -46,6 +46,8 @@ if 'crop_images' in st.session_state:
 
         if st.button('Crop all images'):
 
+            st.spinner("Cropping ... stay tuned!")
+
             # Define the directories
             input_dir = 'stem_cutted_leafs'
             output_dir = 'cropped_images'

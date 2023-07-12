@@ -2,6 +2,10 @@ import streamlit as st
 import os
 import shutil
 
+st.set_page_config(
+    layout="wide"
+)
+
 st.title('Leaf Segmentator')
 
 st.write("""

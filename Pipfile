@@ -9,6 +9,7 @@ matplotlib = "*"
 opencv-python = "*"
 streamlit-cropper = "*"
 streamlit-image-coordinates = "*"
+streamlit-image-select = "*"
 
 [dev-packages]
 ipykernel = "*"

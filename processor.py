@@ -8,7 +8,7 @@ import streamlit as st
 
 def read_images(folder_path):
         images = []
-        for img_name in os.listdir(folder_path):
+        for img_name in sorted(os.listdir(folder_path)):
             img = read_img(folder_path, img_name)
             images.append(img)
             
@@ -20,6 +20,8 @@ def read_img(folder_path, img_name):
 
 
 ##### EXTRACT CHANNEL #####
+
+# TODO: WTF IS extract_channels
 
 def extract_channels(images):
     for idx, img in enumerate(images):

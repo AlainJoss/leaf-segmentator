@@ -80,7 +80,9 @@ if 'clustering_mask' in st.session_state:
                 for idx, img in enumerate(processed_images):
                     counter += 1
 
-                    cm = prc.clustering_mask(processed_images[idx], NUM_CLUSTERS)
+                    start = time.time()
+
+                    cm = prc.clustering_mask(processed_images[idx], num_clusters)
 
                     lcm = prc.largest_component_mask(cm)
 
@@ -89,13 +91,20 @@ if 'clustering_mask' in st.session_state:
                     smoothed = prc.cut_stem(segmented, STOP_DIST, KERNEL_SIZE)
 
                     smoothed = np.where(smoothed == 0, 255, smoothed)
+
+                    st.write(time.time() - start)
                     
                     empty_space.markdown("")
                     text_placeholder.write(f"#### Image {counter}")
                     image_placeholder.image(smoothed)
 
-                    filename = f'{DIR}/img{idx}_{num_clusters}clusters.png'
+                    img_name = st.session_state['original_image_paths'][idx]
+                    st.write(img_name)
+                    filename = f'{DIR}/{img_name}_{num_clusters}clusters.png'
+                    st.write(img_name)
                     cv2.imwrite(filename, smoothed)
+
+                    
 
                     progress_bar.progress((counter) / total_iterations, text=f"Iteration {counter}/{total_iterations}")
 
@@ -117,7 +126,5 @@ if 'clustering_mask' in st.session_state:
             st.session_state['start_segmenting'] = False
             st.experimental_rerun()
 
-
-
 else: 
-    st.error("Go back to 'crop images' to enable this step.")
+    st.error("Go back to 'crop' to enable this step.")
