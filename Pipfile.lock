@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "016198394f13e3ba507abd95478cd3092df7f978a09d2d7aef7061b6083a9a67"
+            "sha256": "fd4c0ad42529e82dc01827fde1daed99e04616a3a0d3ec7f36a0da802d1f132a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -207,6 +207,14 @@
             "markers": "python_version >= '3.5'",
             "version": "==5.1.1"
         },
+        "et-xmlfile": {
+            "hashes": [
+                "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c",
+                "sha256:a2ba85d1d6a74ef63837eed693bcb89c3f752169b0e3e7ae5b16ca5e1b3deada"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==1.1.0"
+        },
         "fonttools": {
             "hashes": [
                 "sha256:00ab569b2a3e591e00425023ade87e8fef90380c1dde61be7691cb524ca5f743",
@@ -289,11 +297,11 @@
         },
         "jsonschema": {
             "hashes": [
-                "sha256:8caf5b57a990a98e9b39832ef3cb35c176fe331414252b6e1b26fd5866f891a4",
-                "sha256:b508dd6142bd03f4c3670534c80af68cd7bbff9ea830b9cf2625d4a3c49ddf60"
+                "sha256:b5896514b46cc9283e9951bfebf51cc72fa3eab229919c0469f94e11b4387776",
+                "sha256:e5fde3cb78f3be8cf49150390ee4efbb8e73c46ea467d42cd4ec16e364495eb3"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==4.18.0"
+            "version": "==4.18.1"
         },
         "jsonschema-specifications": {
             "hashes": [
@@ -539,6 +547,14 @@
             ],
             "index": "pypi",
             "version": "==4.8.0.74"
+        },
+        "openpyxl": {
+            "hashes": [
+                "sha256:a6f5977418eff3b2d5500d54d9db50c8277a368436f4e4f8ddb1be3422870184",
+                "sha256:f91456ead12ab3c6c2e9491cf33ba6d08357d802192379bb482f1033ade496f5"
+            ],
+            "index": "pypi",
+            "version": "==3.1.2"
         },
         "packaging": {
             "hashes": [

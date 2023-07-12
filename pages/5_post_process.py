@@ -8,20 +8,21 @@ import shutil
 
 
 def save_data():
-    if os.path.exists('selected_images'):
-        shutil.rmtree('selected_images')
-    os.makedirs('selected_images', exist_ok=True)
-    if 'further_processing' in st.session_state:
-        del st.session_state['further_processing']
-    if 'further_processing' not in st.session_state:
-        st.session_state['further_processing'] = []
-    for i in range(len(img_paths)):  # Use img_paths instead of groups
-        # If the image is selected, copy it to the new directory
-        if st.session_state[f'select_{str(i)}'] != 'further processing':
-            selected_img_path = img_paths[i][int(st.session_state[f'select_{str(i)}'])]
-            shutil.copy(selected_img_path, 'selected_images/')
-        else:
-            st.session_state['further_processing'].append(i)
+    with st.spinner("Saving ..."):
+        if os.path.exists('selected_images'):
+            shutil.rmtree('selected_images')
+        os.makedirs('selected_images', exist_ok=True)
+        if 'further_processing' in st.session_state:
+            del st.session_state['further_processing']
+        if 'further_processing' not in st.session_state:
+            st.session_state['further_processing'] = []
+        for i in range(len(img_paths)):  # Use img_paths instead of groups
+            # If the image is selected, copy it to the new directory
+            if st.session_state[f'select_{str(i)}'] != 'further processing':
+                selected_img_path = img_paths[i][int(st.session_state[f'select_{str(i)}'])]
+                shutil.copy(selected_img_path, 'selected_images/')
+            else:
+                st.session_state['further_processing'].append(i)
 
 st.write('## Choose Final Images')
 
@@ -31,7 +32,7 @@ def image_paths(dir):
 
 if 'choose_image' in st.session_state:
 
-    if 'define_conversion_rate' not in st.session_state:
+    if 'further_processing' not in st.session_state:
 
         DIR_PROCESSED = 'processed_images'
         DIR_IMAGES = 'cropped_images'
@@ -69,7 +70,7 @@ if 'choose_image' in st.session_state:
                 selection = cols[-1].selectbox("Select option:", select_options, key=key)
 
             if st.form_submit_button(label='Save Selection', on_click=save_data):
-                st.session_state['define_conversion_rate'] = True
+                st.session_state['further_processing'] = True
                 st.experimental_rerun()
 
     else:

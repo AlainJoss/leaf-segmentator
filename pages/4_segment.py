@@ -27,8 +27,7 @@ if 'clustering_mask' in st.session_state:
         - set up the parameters
         - enjoy a coffee break.
         """)
-
-                
+  
         with st.form("Set-Up"):
             KERNEL_SIZE = st.select_slider("**Kernel Size**", options=range(1, 112, 2), key="ks", value=33)
             STOP_DIST = st.select_slider("**Blurring Distance**", options=range(0, 100), key="sd", value=60)
@@ -56,15 +55,11 @@ if 'clustering_mask' in st.session_state:
             DIR = 'processed_images'
             os.makedirs(DIR, exist_ok=True)
 
-
             original_images = prc.read_images('cropped_images')
             
             processed_images = original_images.copy()
 
-
             prc.extract_channels(processed_images)
-
-
 
             total_iterations = len(processed_images) * (NUM_CLUSTERS-1)
             counter = 0
@@ -75,12 +70,9 @@ if 'clustering_mask' in st.session_state:
             text_placeholder = st.empty()
             image_placeholder = st.empty()
 
-
             for num_clusters in range(2, NUM_CLUSTERS + 1):
                 for idx, img in enumerate(processed_images):
                     counter += 1
-
-                    start = time.time()
 
                     cm = prc.clustering_mask(processed_images[idx], num_clusters)
 
@@ -92,39 +84,24 @@ if 'clustering_mask' in st.session_state:
 
                     smoothed = np.where(smoothed == 0, 255, smoothed)
 
-                    st.write(time.time() - start)
-                    
                     empty_space.markdown("")
                     text_placeholder.write(f"#### Image {counter}")
-                    image_placeholder.image(smoothed)
+                    image_placeholder.image(smoothed, width=500)
 
                     img_name = st.session_state['original_image_paths'][idx]
-                    st.write(img_name)
-                    filename = f'{DIR}/{img_name}_{num_clusters}clusters.png'
-                    st.write(img_name)
-                    cv2.imwrite(filename, smoothed)
-
                     
+                    filename = f'{DIR}/{img_name}_{num_clusters}clusters.png'
+                   
+                    cv2.imwrite(filename, smoothed)
 
                     progress_bar.progress((counter) / total_iterations, text=f"Iteration {counter}/{total_iterations}")
 
-            time.sleep(1)
+            time.sleep(1.5)
             st.session_state['choose_image'] = True
             st.experimental_rerun()
 
     else:
         st.success("You can now post process the images!")
-       
-        if st.button("Reset Segmentation"):
-            if os.path.exists('processed_images'):
-                shutil.rmtree('processed_images')
-
-            # TODO: pay super attention if you come back!
-            if 'choose_image' in st.session_state:
-                del st.session_state['choose_image']
-                
-            st.session_state['start_segmenting'] = False
-            st.experimental_rerun()
 
 else: 
     st.error("Go back to 'crop' to enable this step.")

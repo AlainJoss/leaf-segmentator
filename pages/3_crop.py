@@ -41,38 +41,42 @@ if 'crop_images' in st.session_state:
 
         draw = ImageDraw.Draw(image_crop)
         draw.rectangle(((x1_crop, y1_crop), (x2_crop, y2_crop)), outline="red", width=5)
-        st.image(image_crop, caption='Image with selected area and tape', use_column_width=True)
 
+        col1, col2 = st.columns([1.25,10])
 
-        if st.button('Crop all images'):
+        with col2:
+            st.image(image_crop, caption='Image with selected area and tape', width=600)
 
-            st.spinner("Cropping ... stay tuned!")
+        with col1:
+            if st.button('Crop all images'):
 
-            # Define the directories
-            input_dir = 'stem_cutted_leafs'
-            output_dir = 'cropped_images'
-            
-            # Create output directory if it does not exist
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir)
+                st.spinner("Cropping ... stay tuned!")
 
-            # Get all image files in the input directory
-            image_files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
+                # Define the directories
+                input_dir = 'stem_cutted_leafs'
+                output_dir = 'cropped_images'
+                
+                # Create output directory if it does not exist
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir)
 
-            # Loop through each image file
-            for image_file in image_files:
-                # Open the image file
-                img = Image.open(os.path.join(input_dir, image_file))
+                # Get all image files in the input directory
+                image_files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
 
-                # Crop the image
-                cropped_img = img.crop((x1_crop, y1_crop, x2_crop, y2_crop))
+                # Loop through each image file
+                for image_file in image_files:
+                    # Open the image file
+                    img = Image.open(os.path.join(input_dir, image_file))
 
-                # Save the cropped image to the output directory
-                cropped_img.save(os.path.join(output_dir, image_file))
+                    # Crop the image
+                    cropped_img = img.crop((x1_crop, y1_crop, x2_crop, y2_crop))
 
-            st.success(f"All images have been cropped and saved to {output_dir}!")
-            st.session_state['clustering_mask'] = True
-            st.experimental_rerun()
+                    # Save the cropped image to the output directory
+                    cropped_img.save(os.path.join(output_dir, image_file))
+
+                st.success(f"All images have been cropped and saved to {output_dir}!")
+                st.session_state['clustering_mask'] = True
+                st.experimental_rerun()
 
     else:
         st.success("You can now segment the leafs!")

@@ -102,6 +102,7 @@ if 'cut_stems' in st.session_state:
                         save_image(processed_image)
 
                         if st.session_state['idx'] == st.session_state['folder_size'] - 1:
+                            st.spinner("Saving ...")
                             save_images()
                             st.session_state['finished_processing'] = True
                         else:

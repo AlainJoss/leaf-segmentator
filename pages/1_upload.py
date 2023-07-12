@@ -36,7 +36,7 @@ if 'upload_images' in st.session_state:
     else:
         st.success("You can now cut the stems of your leaves!")
 
-        st.write("### Your images:")
+        st.write("#### Your images:")
 
         img_folder = 'images'
         st.session_state['original_image_paths'] = sorted(os.listdir(img_folder))

@@ -88,29 +88,32 @@ def apply_mask(img, mask):
 ##### BLURRING #####
 
 def cut_stem(masked_img, stop_distance, kernel_size):
-    binary_img = gray_to_binary(masked_img)  # changed this line
-    start_row = None
-    end_row = None
+    try:
+        binary_img = gray_to_binary(masked_img) 
+        start_row = None
+        end_row = None
 
-    for row in range(binary_img.shape[0]):
-        current_row = binary_img[row, :]
-        non_zero_indices = np.nonzero(current_row)[0]
-    
-        if non_zero_indices.size > 0:
-            if start_row is None:
-                start_row = row
-            
-            pixel_distance = np.max(non_zero_indices) - np.min(non_zero_indices)
-            
-            if pixel_distance > stop_distance:
-                end_row = row
-                break
+        for row in range(binary_img.shape[0]):
+            current_row = binary_img[row, :]
+            non_zero_indices = np.nonzero(current_row)[0]
 
-    if (start_row is not None and end_row is not None and start_row < end_row) or start_row != 0:
-        stem_region = masked_img[start_row:end_row, :]  # changed this line
-        blurred_stem = median_blur(stem_region, kernel_size)
-        return np.vstack((masked_img[:start_row, :], blurred_stem, masked_img[end_row:, :]))  # changed this line
-    else:
+            if non_zero_indices.size > 0:
+                if start_row is None:
+                    start_row = row
+                
+                pixel_distance = np.max(non_zero_indices) - np.min(non_zero_indices)
+                
+                if pixel_distance > stop_distance:
+                    end_row = row
+                    break
+
+        if (start_row is not None and end_row is not None and start_row < end_row) or start_row != 0:
+            stem_region = masked_img[start_row:end_row, :]  # changed this line
+            blurred_stem = median_blur(stem_region, kernel_size)
+            return np.vstack((masked_img[:start_row, :], blurred_stem, masked_img[end_row:, :]))  # changed this line
+        else:
+            return masked_img
+    except:
         return masked_img
     
 def median_blur(stem_region, kernel_size):

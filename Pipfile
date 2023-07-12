@@ -10,6 +10,7 @@ opencv-python = "*"
 streamlit-cropper = "*"
 streamlit-image-coordinates = "*"
 streamlit-image-select = "*"
+openpyxl = "*"
 
 [dev-packages]
 ipykernel = "*"
