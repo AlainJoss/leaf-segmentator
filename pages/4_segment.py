@@ -1,13 +1,13 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
 import cv2
 import os
-import processor as prc
+import src.processor as prc
 import shutil
 import time
 
-st.write("## Segment Images")
+
+##### SESSION STATES #####
 
 if 'start_segmenting' not in st.session_state:
     st.session_state['start_segmenting'] = False
@@ -15,52 +15,57 @@ if 'start_segmenting' not in st.session_state:
 if 'num_clusters' not in st.session_state:
     st.session_state['num_clusters'] = 0
 
-if 'clustering_mask' in st.session_state:
 
-    if 'choose_image' not in st.session_state:
+##### PAGE #####
+
+st.set_page_config(
+    layout="wide"
+)
+
+st.write("## Segment Images")
+
+if 'segment' in st.session_state:
+    if 'post_process' not in st.session_state:
         
         st.write("""
         The processing procedure will take some time:
         - set up the parameters
-        - enjoy a coffee break.
+        - start the segmentation
+        - supervise the segmentation process
         """)
   
         with st.form("Set-Up"):
-            KERNEL_SIZE = st.select_slider("**Kernel Size**", options=range(1, 112, 2), key="ks", value=33)
-            STOP_DIST = st.select_slider("**Blurring Distance**", options=range(0, 100), key="sd", value=60)
-            NUM_CLUSTERS = st.select_slider("**Number of clusters**", options=range(2, 5), key="nc", value=4)
+            KERNEL_SIZE = st.select_slider("**Kernel Size**", options=range(1, 126, 2), key="ks", value=33)
+            STOP_DIST = st.select_slider("**Blurring Distance**", options=range(1, 101), key="sd", value=60)
+            NUM_CLUSTERS = st.select_slider("**Number of clusters**", options=range(2,8), key="nc", value=4)
 
             st.session_state['num_clusters'] = NUM_CLUSTERS
 
+            OUTPUT_DIR = 'images/segmented'
             if st.form_submit_button("Segment"):
                 st.session_state['start_segmenting'] = True
-                if os.path.exists('processed_images'):
-                    shutil.rmtree('processed_images')
+                if os.path.exists(OUTPUT_DIR):
+                    shutil.rmtree(OUTPUT_DIR)
 
         if st.session_state['start_segmenting']:
 
             if st.button("Stop and Reset"):
-                if os.path.exists('processed_images'):
-                    shutil.rmtree('processed_images')
+                if os.path.exists(OUTPUT_DIR):
+                    shutil.rmtree(OUTPUT_DIR)
                 st.session_state['start_segmenting'] = False
                 st.experimental_rerun()
 
             st.write("")
             st.write("#### Segmenting ...")
 
-            ATTEMPTS = 20
-            DIR = 'processed_images'
-            os.makedirs(DIR, exist_ok=True)
-
-            original_images = prc.read_images('cropped_images')
-            
+            os.makedirs(OUTPUT_DIR, exist_ok=True)
+            original_images = prc.read_images('images/cropped')
             processed_images = original_images.copy()
 
             prc.extract_channels(processed_images)
 
             total_iterations = len(processed_images) * (NUM_CLUSTERS-1)
             counter = 0
-
             progress_bar = st.progress(0)
 
             empty_space = st.empty()
@@ -86,19 +91,18 @@ if 'clustering_mask' in st.session_state:
                     image_placeholder.image(smoothed, width=500)
 
                     img_name = st.session_state['original_image_paths'][idx]
-                    
-                    filename = f'{DIR}/{img_name}_{num_clusters}clusters.png'
-                   
+                    filename = f'{OUTPUT_DIR}/{img_name}_{num_clusters}'
                     cv2.imwrite(filename, smoothed)
 
                     progress_bar.progress((counter) / total_iterations, text=f"Iteration {counter}/{total_iterations}")
 
+            # Enable next step
             time.sleep(1.5)
-            st.session_state['choose_image'] = True
+            st.session_state['post_process'] = True
             st.experimental_rerun()
 
     else:
+        st.session_state['post_process'] = True
         st.success("You can now post process the images!")
-
 else: 
     st.error("Go back to 'crop' to enable this step.")

@@ -2,52 +2,69 @@ import streamlit as st
 import os
 import shutil
 
+
+##### FUNCTIONS #####
+
+def remove_if_exists(path):
+    if os.path.exists(path):
+        if os.path.isfile(path):
+            os.remove(path)
+        elif os.path.isdir(path):
+            shutil.rmtree(path)
+
+
+
+##### PAGE #####
+
 st.set_page_config(
     layout="wide"
 )
 
 st.title('Leaf Segmentator')
 
-st.write("""
+st.write(r"""
 
-#### TODO: 
-- better name images or drop the last part of the name for report
-- change post processing to be more manipolable
-- clean and comment code base
-- extract names of session states to file
-- clean the repo-structure
-- create data folders for images
-- clean example notebook
-- improve explanations on UI
-- correct messages on UI
-- Make explanation on overview.py about whole process
-- Record screen cast with example
-- Make read me with instructions about UI
+This app enables you to segment leaf images and translate the segmented area from $pixel$ to $cm^2$.
 
-Follow the steps:
+#### Some specifics
+- The app was developed to segment images taken on a white background.
+- If you want to be able to process other kinds of images you must change the backend of the app.
 
-- Visit one page after the other.
-- Give the app the time to execute your instructions.
-- Don't refresh the browser during the execution of instructions.
+#### How it works
+- Upload your images as a zip file.
+- Rotate the images such that the leafs are positioned upside-down, and cut the stem.
+- Crop the unused contours of the image, which could interfer with the segmentation.
+- Segment the images by adjusting the given parameters.
+- For each image select the best segmented version, or if no version satisfies your requirements, select further prossing.
+- Further process the images you selected for this task.
+- Define the conversion rate $cm^2/pixel$ to compute the leaf areas.
+- Download the generated report.
+
+
+#### Follow the steps
+
+- Follow the instructions on the UI.
+- The instructions will make you visit one page after the other and perform some task.
+- Give the app the time to execute your instructions, otherwise it could crash.
+- If at any point you encounter an error, refresh the browser and start fresh.
+- Don't refresh the browser if the app doesn't crash, otherwise your progress will be lost.
 
 """)
+         
 
-if 'overview_button' not in st.session_state:
+##### LOGIC #####
+
+if 'upload' not in st.session_state:
     if st.button("Start Processing"):
-        if os.path.exists('images'):
-            shutil.rmtree('images')
-        if os.path.exists('stem_cutted_leafs'):
-            shutil.rmtree('stem_cutted_leafs')
-        if os.path.exists('cropped_images'):
-            shutil.rmtree('cropped_images')   
-            
-        if 'upload_images' not in st.session_state:
-            st.session_state['upload_images'] = True
 
-        st.session_state['overview_button'] = True 
+        # Remove older states
+        remove_if_exists(path='images')
+        remove_if_exists(path='results.xlsx')
+
+        # Enable next step
+        st.session_state['upload'] = True
 
         st.experimental_rerun()
 
-# Check the session variable before showing success message
 else:
     st.success("You can now upload your images!")
