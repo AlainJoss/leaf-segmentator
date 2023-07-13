@@ -3,3 +3,7 @@ myenv/
 .DS_Store
 images/.DS_Store
 .ipynb_checkpoints
+.vscode
+Pipfile
+Pipfile.lock
+images
