@@ -81,7 +81,6 @@ if 'further_processing' in st.session_state:
                         st.session_state['further_process'].remove(st.session_state['further_process'][st.session_state['selected_image_index']])
                         del st.session_state['smoothed']
                         del st.session_state['selected_image_name']
-                        st.session_state['define_conversion_rate'] = True
                         time.sleep(2)
                         st.experimental_rerun()
         else:

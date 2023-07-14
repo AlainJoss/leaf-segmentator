@@ -54,7 +54,7 @@ if 'finalize' in st.session_state:
             results = pd.concat([results, result], ignore_index=True)
 
         # Display the results
-        st.write(results)
+        st.dataframe(results, height=1000, width=300)
 
         # Report download
         results.to_excel("results.xlsx", index=False)
