@@ -25,19 +25,19 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 1. Clone the repository: Clone the application repository to your local machine using the following command in your terminal.
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:AlainJoss/leaf-segmentator.git
 ```
 
 2. Navigate into the project directory:
 
 ```bash
-cd <leaf-segmentator>
+cd leaf-segmentator
 ```
 
 3. Install pipenv if not already installed:
 
 ```bash
-pip install pipenv
+pip3 install pipenv
 ```
 
 4. Create a virtual environment and install the required packages using pipenv and the provided `requirements.txt` file:
