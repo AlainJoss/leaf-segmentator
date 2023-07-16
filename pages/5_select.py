@@ -25,7 +25,8 @@ def save_data():
 ##### PAGE #####
 
 st.set_page_config(
-    layout="wide"
+    layout="wide",
+    page_icon=":leaves:"
 )
 
 st.write('## Choose Final Images')

@@ -3,7 +3,8 @@ import streamlit as st
 from PIL import Image, ImageDraw
 
 st.set_page_config(
-    layout="wide"
+    layout="wide",
+    page_icon=":leaves:"
 )
 
 st.write("## Crop Images")

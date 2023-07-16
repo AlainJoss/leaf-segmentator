@@ -5,7 +5,8 @@ import streamlit as st
 from streamlit_image_coordinates import streamlit_image_coordinates
 
 st.set_page_config(
-    layout="wide"
+    layout="wide",
+    page_icon=":leaves:"
 )
 
 st.write("""

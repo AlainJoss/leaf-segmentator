@@ -17,7 +17,8 @@ def remove_if_exists(path):
 ##### PAGE #####
 
 st.set_page_config(
-    layout="wide"
+    layout="wide",
+    page_icon=":leaves:"
 )
 
 st.title('Leaf Segmentator')
@@ -40,7 +41,7 @@ else:
     st.success("You can now upload your images!")
 
 st.write(r"""
-
+#### Purpose
 This application enables you to segment leaf images and convert the segmented area from pixels to square centimeters.
 
 #### A few details

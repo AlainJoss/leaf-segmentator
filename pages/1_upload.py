@@ -23,7 +23,8 @@ def upload_and_extract_zip(uploaded_file, output_folder):
 ##### PAGE #####
 
 st.set_page_config(
-    layout="wide"
+    layout="wide",
+    page_icon=":leaves:"
 )
 
 st.write("## Upload Your Images")

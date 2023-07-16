@@ -20,7 +20,8 @@ def calculate_area(image, conversion_rate):
 ##### PAGE #####
 
 st.set_page_config(
-    layout="wide"
+    layout="wide",
+    page_icon=":leaves:"
 )
 
 st.write("## Download the Final Report")
