@@ -30,42 +30,47 @@ INPUT_DIR = 'images/selected'
 
 if 'finalize' in st.session_state:
 
-    col1, col2 = st.columns([1,3])
+    # DataFrame for storing results
+    results = pd.DataFrame(columns=["Image", "Area_cm2"])
 
-    with col1:
+    file_names = os.listdir(INPUT_DIR)
 
-        # DataFrame for storing results
-        results = pd.DataFrame(columns=["Image", "Area_cm2"])
+    for old_name in file_names:
+        # Keep only the first 12 characters of the filename
+        new_name = old_name[:12]
+        # Only rename the file if the name has changed
+        if new_name != old_name:
+            os.rename(os.path.join(INPUT_DIR, old_name), os.path.join(INPUT_DIR, new_name))
 
-        file_names = os.listdir(INPUT_DIR)
-
-        for old_name in file_names:
-            # Keep only the first 12 characters of the filename
-            new_name = old_name[:12]
-            # Only rename the file if the name has changed
-            if new_name != old_name:
-                os.rename(os.path.join(INPUT_DIR, old_name), os.path.join(INPUT_DIR, new_name))
-
-
-        # Iterate over all images in the selected_images directory
-        for filename in file_names:
+    # Iterate over all images in the selected_images directory
+    for filename in file_names:
+        try:
             image = cv2.imread(os.path.join(INPUT_DIR, filename))
             area_cm2 = calculate_area(image, st.session_state['conversion_rate'])
             result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
             results = pd.concat([results, result], ignore_index=True)
+        except:
+            st.error("Click on the icon on the sidebar to reload the page. I'm still trying to fix the bug.")
 
+
+    # Download results
+    csv = results.to_csv(index=False).encode('utf-8')
+    download_button = st.download_button(
+        "Download Results",
+        file_name="results.csv",
+        data=csv
+    )
+
+    # Display results and images
+    col1, col2 = st.columns([1,3])
+    with col1:
         # Display the results
-        csv = results.to_csv(index=False).encode('utf-8')
-        st.download_button(
-            "Download Results",
-            file_name="results.csv",
-            data=csv
-        )
         st.dataframe(results, height=600, width=300)
+        st.write(download_button)
 
     with col2:
         img_paths = [os.path.join(INPUT_DIR, filename) for filename in os.listdir(INPUT_DIR)]
-        
+
         # Image grid
         for i in range(0, len(img_paths), 5):
             cols = st.columns(5)

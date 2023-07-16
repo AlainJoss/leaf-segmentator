@@ -77,19 +77,9 @@ if 'post_process' in st.session_state:
                 selection = cols[-1].selectbox("Select option:", select_options, key=key)
 
             # Enable next step
-            """
-
             if st.form_submit_button(label='Save Selection', on_click=save_data):
                 st.session_state['further_processing'] = True
                 st.experimental_rerun()
-            """
-
-            # Enable next step
-            if st.form_submit_button(label='Save Selection', on_click=save_data):
-                st.session_state['further_processing'] = True
-                st.experimental_rerun()
-
-
     else:
         st.session_state['further_processing'] = True
         st.success("You can now further process the images!")

@@ -12,6 +12,9 @@ st.set_page_config(
 st.write("""
 ## Define the Conversion Rate
 """)
+
+if 'define_conversion_rate' not in st.session_state:
+    st.session_state['define_conversion_rate'] = True
         
 if 'define_conversion_rate' in st.session_state:
     if 'finalize' not in st.session_state:
@@ -34,12 +37,12 @@ if 'define_conversion_rate' in st.session_state:
             image_conversion = image_original.copy() 
             image_width, image_height = image_conversion.size
 
-            x_default_1 = int(image_width * 0.25)
-            x_default_2 = int(image_width * 0.75)
-            y_default_1 = int(image_height * 0.45)
-            y_default_2 = int(image_height * 0.55)
-            x1_tape, x2_tape = st.slider('x1, x2', min_value=0, max_value=image_width, value=[x_default_1, x_default_2], step=1)
-            y1_tape, y2_tape = st.slider('y1, y2', min_value=0, max_value=image_height, value=[y_default_1, y_default_2], step=1)
+            x_default_1 = int(4488)
+            x_default_2 = int(68)
+            y_default_1 = int(2028)
+            y_default_2 = int(2058)
+            x1_tape, x2_tape = st.slider('x1, x2', min_value=1, max_value=image_width, value=[x_default_1, x_default_2], step=1)
+            y1_tape, y2_tape = st.slider('y1, y2', min_value=1, max_value=image_height, value=[y_default_1, y_default_2], step=1)
 
             draw = ImageDraw.Draw(image_conversion)
 
