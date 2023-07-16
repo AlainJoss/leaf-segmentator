@@ -44,13 +44,11 @@ if 'finalize' in st.session_state:
 
     # Iterate over all images in the selected_images directory
     for filename in file_names:
-        try:
-            image = cv2.imread(os.path.join(INPUT_DIR, filename))
-            area_cm2 = calculate_area(image, st.session_state['conversion_rate'])
-            result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
-            results = pd.concat([results, result], ignore_index=True)
-        except:
-            st.error("Click on the icon on the sidebar to reload the page. I'm still trying to fix the bug.")
+        image = cv2.imread(os.path.join(INPUT_DIR, filename))
+        area_cm2 = calculate_area(image, st.session_state['conversion_rate'])
+        result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
+        results = pd.concat([results, result], ignore_index=True)
+
 
 
     # Download results
@@ -66,7 +64,6 @@ if 'finalize' in st.session_state:
     with col1:
         # Display the results
         st.dataframe(results, height=600, width=300)
-        st.write(download_button)
 
     with col2:
         img_paths = [os.path.join(INPUT_DIR, filename) for filename in os.listdir(INPUT_DIR)]
