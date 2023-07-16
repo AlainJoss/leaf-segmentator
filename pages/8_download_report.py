@@ -60,9 +60,7 @@ if 'finalize' in st.session_state:
         results.to_excel("results.xlsx", index=False)
         st.download_button(
             "Download Results",
-            data=open("results.xlsx", "rb"),
             file_name="results.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
 
     with col2:
