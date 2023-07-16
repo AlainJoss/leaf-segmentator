@@ -43,11 +43,16 @@ if 'finalize' in st.session_state:
             os.rename(os.path.join(INPUT_DIR, old_name), os.path.join(INPUT_DIR, new_name))
 
     # Iterate over all images in the selected_images directory
-    for filename in file_names:
-        image = cv2.imread(os.path.join(INPUT_DIR, filename))
-        area_cm2 = calculate_area(image, st.session_state['conversion_rate'])
-        result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
-        results = pd.concat([results, result], ignore_index=True)
+        for filename in file_names:
+            filepath = os.path.join(INPUT_DIR, filename)
+            if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+                image = cv2.imread(filepath)
+                area_cm2 = calculate_area(image, st.session_state['conversion_rate'])
+                result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
+                results = pd.concat([results, result], ignore_index=True)
+            else:
+                st.error(f"Image file {filename} is not fully available. Please try again.")
+
 
 
 

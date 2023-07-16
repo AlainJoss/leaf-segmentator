@@ -103,7 +103,6 @@ if 'segment' in st.session_state:
             st.experimental_rerun()
 
     else:
-        st.session_state['post_process'] = True
         st.success("You can now post process the images!")
 else: 
     st.error("Go back to 'crop' to enable this step.")
