@@ -66,7 +66,6 @@ if 'define_conversion_rate' in st.session_state:
                 st.session_state['finalize'] = True
                 st.experimental_rerun()
     else:
-        st.session_state['finalize'] = True
         st.success("You can now create the final report!")
 else: 
     st.error("Go back to 'further process' to enable this step.")

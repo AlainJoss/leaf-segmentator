@@ -54,14 +54,13 @@ if 'finalize' in st.session_state:
             results = pd.concat([results, result], ignore_index=True)
 
         # Display the results
-        st.dataframe(results, height=600, width=300)
-
-        # Report download
-        results.to_excel("results.xlsx", index=False)
+        csv = results.to_csv(index=False).encode('utf-8')
         st.download_button(
             "Download Results",
-            file_name="results.xlsx",
+            file_name="results.csv",
+            data=csv
         )
+        st.dataframe(results, height=600, width=300)
 
     with col2:
         img_paths = [os.path.join(INPUT_DIR, filename) for filename in os.listdir(INPUT_DIR)]

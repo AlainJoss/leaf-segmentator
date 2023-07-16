@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import cv2
 import os
-import src.processor as prc
+import functions.processor as prc
 import shutil
 import time
 

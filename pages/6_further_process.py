@@ -1,5 +1,5 @@
 import streamlit as st
-import src.processor as prc
+import functions.processor as prc
 import os
 import cv2
 import time

@@ -42,7 +42,7 @@ if 'crop' in st.session_state:
         draw = ImageDraw.Draw(image_crop)
         draw.rectangle(((x1_crop, y1_crop), (x2_crop, y2_crop)), outline="red", width=5)
 
-        col1, col2 = st.columns([1.25,10])
+        col1, col2 = st.columns([1.5,10])
         with col2:
             st.image(image_crop, caption='Image with selected area and tape', width=600)
         with col1:

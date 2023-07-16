@@ -22,6 +22,23 @@ st.set_page_config(
 
 st.title('Leaf Segmentator')
 
+##### LOGIC #####
+
+if 'upload' not in st.session_state:
+    if st.button("Start Processing"):
+
+        # Remove older states
+        remove_if_exists(path='images')
+        remove_if_exists(path='results.xlsx')
+
+        # Enable next step
+        st.session_state['upload'] = True
+
+        st.experimental_rerun()
+
+else:
+    st.success("You can now upload your images!")
+
 st.write(r"""
 
 This application enables you to segment leaf images and convert the segmented area from pixels to square centimeters.
@@ -48,21 +65,3 @@ This application enables you to segment leaf images and convert the segmented ar
 - Don't refresh your browser unless the app crashes, as you may lose your progress.
 
 """)
-         
-
-##### LOGIC #####
-
-if 'upload' not in st.session_state:
-    if st.button("Start Processing"):
-
-        # Remove older states
-        remove_if_exists(path='images')
-        remove_if_exists(path='results.xlsx')
-
-        # Enable next step
-        st.session_state['upload'] = True
-
-        st.experimental_rerun()
-
-else:
-    st.success("You can now upload your images!")
