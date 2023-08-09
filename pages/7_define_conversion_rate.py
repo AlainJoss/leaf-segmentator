@@ -37,12 +37,14 @@ if 'define_conversion_rate' in st.session_state:
             image_conversion = image_original.copy() 
             image_width, image_height = image_conversion.size
 
-            x_default_1 = int(4488)
-            x_default_2 = int(68)
-            y_default_1 = int(2028)
-            y_default_2 = int(2058)
-            x1_tape, x2_tape = st.slider('x1, x2', min_value=1, max_value=image_width, value=[x_default_1, x_default_2], step=1)
-            y1_tape, y2_tape = st.slider('y1, y2', min_value=1, max_value=image_height, value=[y_default_1, y_default_2], step=1)
+            x_default_1 = 4488
+            x_default_2 = 68
+            y_default_1 = 2028
+            y_default_2 = 2058
+            x1_tape = st.slider('x1', min_value=1, max_value=image_width, value=x_default_1, step=1)
+            x2_tape = st.slider('x2', min_value=1, max_value=image_width, value=x_default_2, step=1)
+            y1_tape = st.slider('y1', min_value=1, max_value=image_height, value=y_default_1, step=1)
+            y2_tape = st.slider('y2', min_value=1, max_value=image_height, value=y_default_2, step=1)
 
             draw = ImageDraw.Draw(image_conversion)
 

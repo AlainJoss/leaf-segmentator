@@ -77,7 +77,9 @@ if 'finalize' in st.session_state:
         st.dataframe(results, height=600, width=300)
 
     with col2:
-        img_paths = [os.path.join(INPUT_DIR, filename) for filename in os.listdir(INPUT_DIR)]
-        image_grid(img_paths, areas)
+        original = sorted(os.listdir('images/original'))
+        final = [os.path.join(INPUT_DIR, filename) for filename in os.listdir(INPUT_DIR)]
+
+        image_grid(final, areas)
 else: 
     st.error("Go back to 'define conversion rate' to enable this step.")

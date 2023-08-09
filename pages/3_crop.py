@@ -48,24 +48,24 @@ if 'crop' in st.session_state:
             st.image(image_crop, caption='Image with selected area and tape', width=600)
         with col1:
             if st.button('Crop all images'):
-                st.spinner("Cropping ... stay tuned!")
-                INPUT_DIR = 'images/stem_cutted'
-                OUTPUT_DIR = 'images/cropped'
-                
-                if not os.path.exists(OUTPUT_DIR):
-                    os.makedirs(OUTPUT_DIR)
+                with st.spinner("Cropping ... stay tuned!"):
+                    INPUT_DIR = 'images/stem_cutted'
+                    OUTPUT_DIR = 'images/cropped'
+                    
+                    if not os.path.exists(OUTPUT_DIR):
+                        os.makedirs(OUTPUT_DIR)
 
-                image_files = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
+                    image_files = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
 
-                # Crop and save
-                for image_file in image_files:
-                    img = Image.open(os.path.join(INPUT_DIR, image_file))
-                    cropped_img = img.crop((x1_crop, y1_crop, x2_crop, y2_crop))
-                    cropped_img.save(os.path.join(OUTPUT_DIR, image_file))
+                    # Crop and save
+                    for image_file in image_files:
+                        img = Image.open(os.path.join(INPUT_DIR, image_file))
+                        cropped_img = img.crop((x1_crop, y1_crop, x2_crop, y2_crop))
+                        cropped_img.save(os.path.join(OUTPUT_DIR, image_file))
 
-                st.success(f"All images have been cropped and saved to {OUTPUT_DIR}!")
-                st.session_state['segment'] = True
-                st.experimental_rerun()
+                    st.success(f"All images have been cropped and saved to {OUTPUT_DIR}!")
+                    st.session_state['segment'] = True
+                    st.experimental_rerun()
     else:
         st.session_state['segment'] = True
         st.success("You can now segment the leafs!")
