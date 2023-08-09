@@ -10,17 +10,32 @@ def save_data():
         if os.path.exists(OUTPUT_DIR):
             shutil.rmtree(OUTPUT_DIR)
         os.makedirs(OUTPUT_DIR, exist_ok=True)
+
         if 'further_process' in st.session_state:
             del st.session_state['further_process']
-        if 'further_process' not in st.session_state:
+        else:
             st.session_state['further_process'] = []
+
         for i in range(len(img_paths)):  
             if st.session_state[f'select_{str(i)}'] != 'further process':
                 selected_img_path = img_paths[i][int(st.session_state[f'select_{str(i)}'])]
                 shutil.copy(selected_img_path, OUTPUT_DIR + '/')
             else:
                 st.session_state['further_process'].append(i)
+        
+        rename_images(OUTPUT_DIR)
+
         st.session_state['further_processing'] = True
+
+def rename_images(dir):
+    file_names = os.listdir(dir)
+    for old_name in file_names:
+        # Keep only the first 12 characters of the filename
+        new_name = old_name[0:12]
+        # Only rename the file if the name has changed
+        if new_name != old_name:
+            os.rename(os.path.join(dir, old_name), os.path.join(dir, new_name))
+
 
 ##### PAGE #####
 

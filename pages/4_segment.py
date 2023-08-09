@@ -91,7 +91,7 @@ if 'segment' in st.session_state:
                     text_placeholder.write(f"#### Image {counter}")
                     image_placeholder.image(smoothed, width=500)
 
-                    img_name = st.session_state['original_image_paths'][idx]
+                    img_name = st.session_state['image_names'][idx]
                     filename = f'{OUTPUT_DIR}/{img_name}_{num_clusters}'
                     cv2.imwrite(filename, smoothed)
 

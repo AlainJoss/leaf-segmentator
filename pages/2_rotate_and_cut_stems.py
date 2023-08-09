@@ -20,14 +20,13 @@ def process_image(img, slider_value_height, slider_value_angle):
         # calculate corresponding y-position on the line for current x-position
         y_on_line = int(slope * (x - center_x) + slider_value_height)
 
-        # make all pixels above the line white
-        img_array[:y_on_line, x] = 255
+        # check if y_on_line goes beyond the image boundaries
+        if 0 <= y_on_line < img_array.shape[0]:
+            # make all pixels above the line white
+            img_array[:y_on_line, x] = 255
 
     processed_img = Image.fromarray(img_array)
     return processed_img
-
-
-
 
 def save_image(img):
     st.session_state['processed'].append(img)

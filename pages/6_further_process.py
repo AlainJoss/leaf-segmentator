@@ -12,9 +12,9 @@ st.set_page_config(
 
 ##### FUNCTIONS #####
 
-def save_image(img, img_name, num_clusters):
+def save_image(img, img_name):
     OUTPUT_DIR = 'images/selected'
-    filename = f'{OUTPUT_DIR}/{img_name}_{num_clusters}'
+    filename = f'{OUTPUT_DIR}/{img_name}'
     cv2.imwrite(filename, img)
 
 def extract_channels(img):
@@ -78,7 +78,7 @@ if 'further_processing' in st.session_state:
                     
                 with col1:
                     if st.button("Save Image"):
-                        save_image(st.session_state['smoothed'], st.session_state['selected_image_name'], NUM_CLUSTERS)
+                        save_image(st.session_state['smoothed'], st.session_state['selected_image_name'])
                         st.session_state['further_process'].remove(st.session_state['further_process'][st.session_state['selected_image_index']])
                         del st.session_state['smoothed']
                         del st.session_state['selected_image_name']

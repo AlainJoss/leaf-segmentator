@@ -19,6 +19,16 @@ def upload_and_extract_zip(uploaded_file, output_folder):
     if os.path.exists(macos_folder):
         shutil.rmtree(macos_folder)
 
+def image_grid(img_paths, k=5):
+    # Create column groups
+    groups = [img_paths[n:n+k] for n in range(0, len(img_paths), k)]
+
+    # Display the images
+    for group in groups:
+        cols = st.columns(k)
+        for col, img_path in zip(cols, group):
+            col.image(img_path, use_column_width=True)
+
 
 ##### PAGE #####
 
@@ -30,6 +40,9 @@ st.set_page_config(
 st.write("## Upload Your Images")
 
 if 'upload' in st.session_state:
+
+    OUTPUT_DIR = 'images/original'
+    
     if 'cut_stems' not in st.session_state:
 
         st.write(r"""
@@ -42,8 +55,7 @@ if 'upload' in st.session_state:
 
         if uploaded_file is not None:
             # Load images
-            output_folder = os.path.join('images', 'original')
-            upload_and_extract_zip(uploaded_file, output_folder)
+            upload_and_extract_zip(uploaded_file, OUTPUT_DIR)
             
             # Enable next step
             st.success("Images successfully extracted!")
@@ -54,18 +66,12 @@ if 'upload' in st.session_state:
         st.success("You can now rotate and cut the stems of your leaves!")
         st.write("#### Your images:")
 
-        # Create column groups
-        img_folder = os.path.join('images', 'original')
-        st.session_state['original_image_paths'] = sorted(os.listdir(img_folder))
-        img_paths = [os.path.join(img_folder, img) for img in os.listdir(img_folder)]
-        K = 5
-        groups = [img_paths[n:n+K] for n in range(0, len(img_paths), K)]
+        image_names = sorted(os.listdir(OUTPUT_DIR))
 
-        # Display the images
-        for group in groups:
-            cols = st.columns(len(group))
-            for col, img_path in zip(cols, group):
-                col.image(img_path, use_column_width=True)
+        st.session_state['image_names'] = image_names
+
+        img_paths = [os.path.join(OUTPUT_DIR, img) for img in image_names]
+        image_grid(img_paths, 5)
 
 else: 
     st.error("Go back to 'overview' to enable this step.")
