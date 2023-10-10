@@ -57,10 +57,16 @@ if 'finalize' in st.session_state:
             image = cv2.imread(filepath)
             area_cm2 = calculate_area(image, st.session_state['conversion_rate'])
             areas.append(area_cm2)
-            result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
-            results = pd.concat([results, result], ignore_index=True)
+            if filename not in results["Image"].values:
+                result = pd.DataFrame([{"Image": filename, "Area_cm2": area_cm2}])
+                results = pd.concat([results, result], ignore_index=True)
+
         else:
-            st.error(f"Image file {filename} is not fully available. Please try again.")
+            # options: 
+            # automatic refresh: st.experimental_rerun()
+            # manual refresh with button: if st.button('Please refresh page'): st.experimental_rerun()
+            # manual refresh on sidebar: st.error("Please refresh the page by clicking on its name on the side bar.")"
+            st.experimental_rerun()
 
     # Download results
     csv = results.to_csv(index=False).encode('utf-8')
