@@ -2,7 +2,13 @@
 
 Leaf Segmentator is an application developed with Streamlit, which allows to segment a leaf from the image-background and compute its area in cm².
 
-## Features and Usage
+## Example
+
+Here is an example of segmentation:
+![Original](/images/orig.jpeg)
+![Segmented](/images/segm.jpeg)
+
+## Usage
 
 1. **Start Processing**: Click the "Start Processing" button to begin. This will remove older states and prepare the application for image upload.
 2. **Upload Images**: Users can upload a zip file containing the images they want to segment.
