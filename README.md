@@ -4,10 +4,9 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 
 ## Example
 
-Here is an example of segmentation:
 <p align="center">
-  <img src="/examples/orig.jpeg" alt="First Image" width="350"/>
-  <img src="/examples/segm.jpeg" alt="Second Image" width="120"/> 
+  <img src="/examples/original.jpeg" alt="First Image" width="350" style="vertical-align: middle;"/>
+  <img src="/examples/segmented.jpeg" alt="Second Image" width="290" style="vertical-align: top;"/> 
 </p>
 
 
