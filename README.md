@@ -1,6 +1,6 @@
 # Leaf Segmentator
 
-Leaf Segmentator is an application developed with Streamlit, which allows to segment leaf images and translate the segmented area from pixels to square centimeters (cm²).
+Leaf Segmentator is an application developed with Streamlit, which allows to segment a leaf from the image-background and compute its area in cm².
 
 ## Features and Usage
 
@@ -18,7 +18,7 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 - The app was designed to segment images taken on a white background. If you wish to process other kinds of images, you must modify the backend of the app.
 - Give the app time to execute your instructions to avoid crashes.
 - If an error occurs, refresh the browser and start again.
-- Avoid refreshing the browser if the app does not crash, as your progress will be lost.
+- Avoid refreshing the browser if the app does not crash, otherwise your progress will be lost.
 
 ## Setup and Installation
 
