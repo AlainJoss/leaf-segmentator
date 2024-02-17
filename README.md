@@ -5,8 +5,8 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 ## Example
 
 Here is an example of segmentation:
-![Original](/images/orig.jpeg)
-![Segmented](/images/segm.jpeg)
+![Original](/examples/orig.jpeg)
+![Segmented](/examples/segm.jpeg)
 
 ## Usage
 
