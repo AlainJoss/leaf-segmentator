@@ -4,11 +4,19 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 
 ## Example
 
-<p align="center">
-  <img src="/examples/original.jpeg" alt="First Image" width="350" style="vertical-align: middle;"/>
-  <img src="/examples/segmented.jpeg" alt="Second Image" width="290" style="vertical-align: top;"/> 
-</p>
+<table style="width: 100%; text-align: center;">
+  <tr>
+    <td style="width: 50%;">Original</td>
+    <td style="width: 50%;">Segmented</td>
+  </tr>
+  <tr>
+    <td><img src="/examples/original.jpeg" alt="First Image" width="350"/></td>
+    <td><img src="/examples/segmented.jpeg" alt="Second Image" width="287"/></td>
+  </tr>
+</table>
 
+
+Leaf area: 20.99 $cm^2$
 
 ## Usage
 
