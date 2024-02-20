@@ -14,16 +14,19 @@ Leaf area: 20.99 $cm^2$
     <td style="width: 50%;">Segmented</td>
   </tr>
   <tr>
-    <td><img src="/examples/original.jpeg" alt="First Image" width="350"/></td>
-    <td><img src="/examples/segmented.jpeg" alt="Second Image" width="287"/></td>
+    <td><img src="/examples/original.jpeg" alt="First Image" width="300"/></td>
+    <td><img src="/examples/segmented.jpeg" alt="Second Image" width="250"/></td>
   </tr>
 </table>
 
 ## The App
 Here are a few screenshots of the app's appearance.
 
-![select](examples/screenshots/select.png)
-![download report](examples/screenshots/report.png)
+<!-- Image 1 resized by height -->
+<img src="examples/screenshots/select.png" alt="Select Screen" height="370">
+
+<!-- Image 2 resized by height -->
+<img src="examples/screenshots/report.png" alt="Download Report Screen" height="330">
 
 ## Usage
 
