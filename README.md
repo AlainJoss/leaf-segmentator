@@ -19,6 +19,12 @@ Leaf area: 20.99 $cm^2$
   </tr>
 </table>
 
+## The App
+Here are a few screenshots of the app's appearance.
+
+![select](examples/screenshots/select.png)
+![download report](examples/screenshots/report.png)
+
 ## Usage
 
 1. **Start Processing**: Click the "Start Processing" button to begin. This will remove older states and prepare the application for image upload.
