@@ -4,12 +4,20 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 
 ## Example
 
-Here is an example of segmentation:
-<p align="center">
-  <img src="/examples/orig.jpeg" alt="First Image" width="350"/>
-  <img src="/examples/segm.jpeg" alt="Second Image" width="120"/> 
-</p>
+The area of the segmented leaf is computed considering all non-white pixels.
 
+Leaf area: 20.99 $cm^2$
+
+<table style="width: 100%; text-align: center;">
+  <tr>
+    <td style="width: 50%;">Original</td>
+    <td style="width: 50%;">Segmented</td>
+  </tr>
+  <tr>
+    <td><img src="/examples/original.jpeg" alt="First Image" width="350"/></td>
+    <td><img src="/examples/segmented.jpeg" alt="Second Image" width="287"/></td>
+  </tr>
+</table>
 
 ## Usage
 
