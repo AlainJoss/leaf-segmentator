@@ -23,7 +23,7 @@ Leaf area: 20.99 $cm^2$
 Here are a few screenshots of the app's appearance.
 
 <!-- Image 1 resized by height -->
-<img src="examples/screenshots/select.png" alt="Select Screen" height="370">
+<img src="examples/screenshots/select.png" alt="Select Screen" height="403">
 
 <!-- Image 2 resized by height -->
 <img src="examples/screenshots/report.png" alt="Download Report Screen" height="330">
