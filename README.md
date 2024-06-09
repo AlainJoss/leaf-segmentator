@@ -4,7 +4,7 @@ Leaf Segmentator is an application developed with Streamlit, which allows to seg
 
 ## Example
 
-The area of the segmented leaf is computed considering all non-white pixels.
+The area of the segmented leaf is computed considering all non-white pixels after segmentation.
 
 Leaf area: 20.99 $cm^2$
 
